@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "achievementplates",
+  "version": "${version}",
+  "name": "Achievementplates",
+  "description": "Adds plates to display achievements you obtained",
+  "authors": [
+    "Pollux28"
+  ],
+  "contact": {},
+  "license": "LGPL-3.0",
+  "icon": "assets/achievementplates/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "eu.pollux28.achievementplates.AchievementPlates"
+    ]
+  },
+  "mixins": [
+    "achievementplates.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.6",
+    "fabric": "*",
+    "minecraft": "1.17.1"
+  }
+}
