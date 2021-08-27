@@ -1,0 +1,33 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "rolls": 1.0,
+      "bonus_rolls": 0.0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "functions": [
+            {
+              "function": "minecraft:copy_nbt",
+              "source": "block_entity",
+              "ops": [
+                {
+                  "source": "display",
+                  "target": "BlockEntityTag.display",
+                  "op": "replace"
+                },
+                {
+                  "source": "player_name",
+                  "target": "BlockEntityTag.player_name",
+                  "op": "replace"
+                }
+              ]
+            }
+          ],
+          "name": "achievement_plates:achievement_plate"
+        }
+      ]
+    }
+  ]
+}
