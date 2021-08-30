@@ -27,7 +27,7 @@ public class EarnAdvancementEvent {
                 nbt2.putString("player_name", playerEntity.getName().asString());
                 nbt1.put("BlockEntityTag", nbt2);
                 ItemStack itemStack = ModBlocks.PLATE_ITEM.getDefaultStack();
-                itemStack.setNbt(nbt1);
+                itemStack.setTag(nbt1);
                 itemStack.setCustomName(playerEntity.getName().shallowCopy().setStyle(Style.EMPTY.withColor(Formatting.AQUA)).append(new LiteralText("'s ").setStyle(Style.EMPTY.withColor(Formatting.GRAY))).append(display.getTitle().shallowCopy().setStyle(Style.EMPTY.withColor(display.getFrame().getTitleFormat()))).append(new LiteralText(" trophy plate").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
                 if (playerEntity.giveItemStack(itemStack)) {
                     playerEntity.world.playSound((PlayerEntity)null, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), SoundEvents.ENTITY_ITEM_PICKUP, SoundCategory.PLAYERS, 0.2F, ((playerEntity.getRandom().nextFloat() - playerEntity.getRandom().nextFloat()) * 0.7F + 1.0F) * 2.0F);

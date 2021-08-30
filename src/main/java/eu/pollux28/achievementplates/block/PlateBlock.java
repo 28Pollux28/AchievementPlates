@@ -88,7 +88,7 @@ public class PlateBlock extends HorizontalFacingBlock implements BlockEntityProv
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         super.onPlaced(world, pos, state, placer, itemStack);
-        NbtCompound nbt = itemStack.getOrCreateNbt();
+        NbtCompound nbt = itemStack.getOrCreateTag();
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof PlateBlockEntity plateBlockEntity) {
 

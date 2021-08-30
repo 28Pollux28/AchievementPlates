@@ -23,7 +23,7 @@ import javax.swing.text.html.parser.Entity;
 
 public class ModBlocks {
 
-    public static final Block PLATE_BLOCK = new PlateBlock(FabricBlockSettings.of(Material.DECORATION).strength(1.0f));
+    public static final Block PLATE_BLOCK = new PlateBlock(FabricBlockSettings.of(Material.DECORATION).strength(1f,0.5f));
     public static BlockEntityType<PlateBlockEntity>PLATE_BLOCK_ENTITY;
     public static Item PLATE_ITEM;
     public static ItemStack PLATE_ITEM_STACK;
@@ -46,7 +46,7 @@ public class ModBlocks {
         PLATE_ITEM_STACK = PLATE_ITEM.getDefaultStack();
         NbtCompound nbtCompound = new NbtCompound();
         nbtCompound.putBoolean("give",true);
-        PLATE_ITEM_STACK.setNbt(nbtCompound);
+        PLATE_ITEM_STACK.setTag(nbtCompound);
     }
 
 }

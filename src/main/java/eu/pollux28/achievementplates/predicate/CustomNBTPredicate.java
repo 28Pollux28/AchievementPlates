@@ -6,6 +6,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import eu.pollux28.achievementplates.AchievementPlates;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
+import net.minecraft.nbt.NbtHelper;
 import net.minecraft.nbt.StringNbtReader;
 import net.minecraft.predicate.NbtPredicate;
 import net.minecraft.util.JsonHelper;
@@ -23,7 +24,6 @@ public class CustomNBTPredicate extends NbtPredicate{
 
     @Override
     public boolean test(@Nullable NbtElement element) {
-        AchievementPlates.logger.warn("Yo !");
         if(this.nbt !=null && this.nbt.getSize()==0){
             if(element == null){
                 return true;
@@ -31,8 +31,11 @@ public class CustomNBTPredicate extends NbtPredicate{
                 return false;
             }
         }
-
-        return super.test(element);
+        if (element == null) {
+            return this == ANY;
+        } else {
+            return this.nbt == null || NbtHelper.matches(this.nbt, element, true);
+        }
     }
     public static CustomNBTPredicate fromJson(@Nullable JsonElement json) {
         if (json != null && !json.isJsonNull()) {
