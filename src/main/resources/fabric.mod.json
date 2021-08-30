@@ -19,6 +19,7 @@
   "mixins": [
     "achievementplates.mixins.json"
   ],
+  "accessWidener" : "plate.access",
   "depends": {
     "fabricloader": ">=0.11.6",
     "fabric": "*",

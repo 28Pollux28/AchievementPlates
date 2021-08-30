@@ -9,6 +9,10 @@
           "type": "minecraft:item",
           "functions": [
             {
+              "function": "minecraft:copy_name",
+              "source": "block_entity"
+            },
+            {
               "function": "minecraft:copy_nbt",
               "source": "block_entity",
               "ops": [
@@ -26,6 +30,11 @@
             }
           ],
           "name": "achievement_plates:achievement_plate"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
         }
       ]
     }

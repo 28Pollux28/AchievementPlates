@@ -11,7 +11,10 @@ import net.minecraft.block.Material;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.BlockItem;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -22,6 +25,8 @@ public class ModBlocks {
 
     public static final Block PLATE_BLOCK = new PlateBlock(FabricBlockSettings.of(Material.DECORATION).strength(1.0f));
     public static BlockEntityType<PlateBlockEntity>PLATE_BLOCK_ENTITY;
+    public static Item PLATE_ITEM;
+    public static ItemStack PLATE_ITEM_STACK;
 
 
     public static void registerBlocks(){
@@ -37,7 +42,11 @@ public class ModBlocks {
 
     private static void registerBlockItem(String name, Block block){
         registerAsBlock(name, block);
-        Registry.register(Registry.ITEM, new Identifier(AchievementPlates.MODID,name),new BlockItem(PLATE_BLOCK,new FabricItemSettings().group(ItemGroup.DECORATIONS)));
+        PLATE_ITEM =Registry.register(Registry.ITEM, new Identifier(AchievementPlates.MODID,name),new BlockItem(PLATE_BLOCK,new FabricItemSettings()/*.group(ItemGroup.DECORATIONS)*/));
+        PLATE_ITEM_STACK = PLATE_ITEM.getDefaultStack();
+        NbtCompound nbtCompound = new NbtCompound();
+        nbtCompound.putBoolean("give",true);
+        PLATE_ITEM_STACK.setNbt(nbtCompound);
     }
 
 }

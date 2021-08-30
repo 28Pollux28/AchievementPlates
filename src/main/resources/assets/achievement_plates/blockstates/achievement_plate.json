@@ -1,7 +1,20 @@
 {
   "variants": {
-    "": {
-      "model": "achievement_plates:block/achievement_plate"
+    "facing=east": {
+      "model": "achievement_plates:block/achievement_plate",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "achievement_plates:block/achievement_plate",
+      "y": 0
+    },
+    "facing=west": {
+      "model": "achievement_plates:block/achievement_plate",
+      "y": 270
+    },
+    "facing=south": {
+      "model": "achievement_plates:block/achievement_plate",
+      "y": 180
     }
   }
 }

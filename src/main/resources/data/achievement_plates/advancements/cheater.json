@@ -1,0 +1,38 @@
+{
+  "parent": "minecraft:story/root",
+  "display": {
+    "icon": {
+      "item": "minecraft:command_block"
+    },
+    "title": {
+      "translate": "advancement.cheater.title"
+    },
+    "description": {
+      "translate": "advancement.cheater.desc"
+    },
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": true
+  },
+  "criteria": {
+    "cheat_trophy": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "items": [
+              "achievement_plates:achievement_plate"
+            ],
+            "nbt": "{}"
+          }
+        ]
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cheat_trophy"
+    ]
+  ]
+}
