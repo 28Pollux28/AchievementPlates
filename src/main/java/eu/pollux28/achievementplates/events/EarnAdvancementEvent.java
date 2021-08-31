@@ -45,8 +45,17 @@ public class EarnAdvancementEvent {
 
     public static void writeDisplayToNbt(NbtCompound nbt, AdvancementDisplay display){
         NbtCompound nbtCompound = new NbtCompound();
-        nbtCompound.putString("display_title",((TranslatableText)display.getTitle()).getKey());
-        nbtCompound.putString("display_desc",((TranslatableText)display.getDescription()).getKey());
+        if(display.getTitle() instanceof TranslatableText title){
+            nbtCompound.putString("display_title",title.getKey());
+        }else{
+            nbtCompound.putString("display_title",display.getTitle().asString());
+        }
+        if(display.getDescription() instanceof TranslatableText desc){
+            nbtCompound.putString("display_desc",desc.getKey());
+        }else{
+            nbtCompound.putString("display_desc",display.getDescription().asString());
+        }
+
         if(display.getBackground()!=null){
             nbtCompound.putString("display_background",display.getBackground().toString());
         }
