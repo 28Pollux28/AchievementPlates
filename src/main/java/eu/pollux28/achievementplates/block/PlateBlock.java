@@ -4,7 +4,6 @@ import com.google.common.collect.ImmutableMap;
 import eu.pollux28.achievementplates.block.entity.PlateBlockEntity;
 import net.minecraft.advancement.AdvancementDisplay;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.AbstractFurnaceBlockEntity;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -116,6 +115,11 @@ public class PlateBlock extends HorizontalFacingBlock implements BlockEntityProv
             }
             return ActionResult.CONSUME;
         }
+    }
+    @Override
+    public ItemStack getPickStack(BlockView world, BlockPos pos, BlockState state) {
+        BlockEntity blockEntity = world.getBlockEntity(pos);
+        return blockEntity instanceof PlateBlockEntity ? ((PlateBlockEntity)blockEntity).getPickStack() : super.getPickStack(world, pos, state);
     }
 
     @Override

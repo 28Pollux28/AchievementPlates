@@ -2,6 +2,7 @@ package eu.pollux28.achievementplates.block.entity;
 
 import eu.pollux28.achievementplates.block.PlateBlock;
 import eu.pollux28.achievementplates.init.ModBlocks;
+import eu.pollux28.achievementplates.utils.Utils;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.advancement.AdvancementDisplay;
 import net.minecraft.advancement.AdvancementFrame;
@@ -126,6 +127,11 @@ public class PlateBlockEntity extends BlockEntity implements Nameable {
         }
         return ActionResult.CONSUME;
     }
+
+    public ItemStack getPickStack() {
+        return Utils.getPlateItemStack(new LiteralText(playerName), this.display);
+    }
+
     public void setCustomName(Text customName) {
         this.customName = customName;
     }
