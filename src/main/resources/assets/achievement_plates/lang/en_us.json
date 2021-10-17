@@ -1,5 +1,11 @@
 {
   "advancement.cheater.title": "You're A Cheater !",
   "advancement.cheater.desc": "Caught red-handed !",
-  "block.achievement_plates.achievement_plate": "You're not supposed to get this !! If not on purpose open an issue"
+  "block.achievement_plates.achievement_plate": "You're not supposed to get this !! If not on purpose open an issue",
+  "achievement_plates.chat.claim_message": "You have %s trophies to %s !",
+  "achievement_plates.chat.claim_message_action": "claim",
+  "achievement_plates.chat.claim_message_tooltip": "Click to obtain your trophies",
+  "achievement_plates.chat.claim_message_no_trophy": "You don't have any trophy to claim !",
+  "achievement_plates.chat.claim_message_not_enough_space": "There was not enough space in your inventory. %s",
+  "achievement_plates.chat.claim_message_given":"You recieved %s trophies"
 }

@@ -4,13 +4,12 @@
   "package": "eu.pollux28.achievementplates.mixins",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "PlayerAdvancementTrackerMixin",
+    "ItemPredicateBuilderMixin",
     "ItemPredicateMixin",
-    "ItemPredicateBuilderMixin"
+    "PlayerAdvancementTrackerMixin"
   ],
   "client": [
     "ClientPlayNetworkHandlerMixin"
-
   ],
   "injectors": {
     "defaultRequire": 1

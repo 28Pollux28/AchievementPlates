@@ -13,4 +13,5 @@ public class MainConfigData {
     public Map<String, ArrayList<String>> whitelist= Map.of("namespace", Lists.newArrayList("examplenamespace"),"identifier", Lists.newArrayList("modid:advancement_id"),"type", Lists.newArrayList("task | challenge | goal"));
     public boolean useBlacklist = false;
     public boolean useWhitelist = false;
+    public int tickDelayBetweenClaimMessages = 6000;
 }
