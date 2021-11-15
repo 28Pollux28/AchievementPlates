@@ -9,6 +9,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.*;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
@@ -34,15 +36,9 @@ public class PlayerTrophyManager{
         return playerTrophyManager;
     }
     public void tick(MinecraftServer server){
-        if(server.getTicks()%AchievementPlates.CONFIG.tickDelayBetweenClaimMessages ==0){
-            if(this.playerEntity.isDisconnected()){
-                AchievementPlates.trophyManagers.remove(this.playerEntity);
-                return;
-            }
             if(this.toGiveTrophies.size()!=0){
                 sendClaimMessage();
             }
-        }
     }
     public void addTrophy(Advancement advancement){
         toGiveTrophies.add(advancement);
@@ -57,7 +53,7 @@ public class PlayerTrophyManager{
     private void sendClaimMessage(){
         Text text =getClaimText();
         playerEntity.sendMessage(new TranslatableText("achievement_plates.chat.claim_message",toGiveTrophies.size(), text).styled(style -> style.withColor(Formatting.YELLOW)), false);
-
+        playerEntity.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.RECORDS,1.0f,1.0f);
     }
 
     public void giveTrophies(ServerCommandSource source) {

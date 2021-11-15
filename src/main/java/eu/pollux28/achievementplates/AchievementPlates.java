@@ -36,7 +36,16 @@ public class AchievementPlates implements ModInitializer {
             BlockEntityRendererRegistry.INSTANCE.register(ModBlocks.PLATE_BLOCK_ENTITY, PlateBlockEntityRenderer::new);
         }
         ServerTickEvents.END_SERVER_TICK.register(server -> {
-            trophyManagers.forEach((playerEntity, playerTrophyManager) -> playerTrophyManager.tick(server));
+            if(server.getTicks()%AchievementPlates.CONFIG.tickDelayBetweenClaimMessages ==0) {
+                for (var entryIterator = trophyManagers.entrySet().iterator(); entryIterator.hasNext(); ) {
+                    var entry = entryIterator.next();
+                    if (entry.getKey().isDisconnected()) {
+                        entryIterator.remove();
+                    } else {
+                        entry.getValue().tick(server);
+                    }
+                }
+            }
         });
         CONFIG = Config.init();
         refreshConfig();
