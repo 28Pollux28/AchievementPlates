@@ -43,7 +43,7 @@ public class Utils {
         nbt2.putString("player_name", playerName.asString());
         nbt1.put("BlockEntityTag", nbt2);
         ItemStack itemStack = ModBlocks.PLATE_ITEM.getDefaultStack();
-        itemStack.setTag(nbt1);
+        itemStack.setNbt(nbt1);
         itemStack.setCustomName(playerName.shallowCopy().setStyle(Style.EMPTY.withColor(Formatting.AQUA)).append(new LiteralText("'s ").setStyle(Style.EMPTY.withColor(Formatting.GRAY))).append(display.getTitle().shallowCopy().setStyle(Style.EMPTY.withColor(display.getFrame().getTitleFormat()))).append(new LiteralText(" trophy plate").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
         return itemStack;
     }

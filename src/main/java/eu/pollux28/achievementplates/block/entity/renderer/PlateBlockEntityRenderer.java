@@ -35,7 +35,7 @@ public class PlateBlockEntityRenderer implements BlockEntityRenderer<PlateBlockE
         Direction direction = entity.getCachedState().get(PlateBlock.FACING);
         ItemStack itemStack = entity.getDisplay().getIcon();
         matrixStack.push();
-        Matrix4f matrix4f = matrixStack.peek().getModel();
+        Matrix4f matrix4f = matrixStack.peek().getPositionMatrix();
         if(blockState.getBlock() instanceof PlateBlock){
             this.renderSides(entity, matrix4f, vertexConsumerProvider.getBuffer(this.getLayer()),light);
             matrixStack.pop();

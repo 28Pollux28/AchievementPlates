@@ -45,7 +45,7 @@ public class Commands {
 
     private static int execute(ServerCommandSource commandSource){
         try {
-            commandSource.getMinecraftServer().getPlayerManager().getAdvancementTracker(commandSource.getPlayer());
+            commandSource.getServer().getPlayerManager().getAdvancementTracker(commandSource.getPlayer());
             Collection<Advancement> advancements = MinecraftClient.getInstance().getNetworkHandler().getAdvancementHandler().getManager().getAdvancements();
             advancements.forEach(advancement -> {
                 if(advancement.getDisplay() !=null && advancement.getDisplay().shouldShowToast()){

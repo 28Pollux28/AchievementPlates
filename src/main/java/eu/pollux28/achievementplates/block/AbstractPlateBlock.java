@@ -59,7 +59,7 @@ public abstract class AbstractPlateBlock extends HorizontalFacingBlock implement
     @Override
     public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
         super.onPlaced(world, pos, state, placer, itemStack);
-        NbtCompound nbt = itemStack.getOrCreateTag();
+        NbtCompound nbt = itemStack.getOrCreateNbt();
         BlockEntity blockEntity = world.getBlockEntity(pos);
         if (blockEntity instanceof PlateBlockEntity plateBlockEntity) {
 
