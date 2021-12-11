@@ -37,7 +37,11 @@ public class PlayerTrophyManager{
     }
     public void tick(MinecraftServer server){
             if(this.toGiveTrophies.size()!=0){
-                sendClaimMessage();
+                if(AchievementPlates.CONFIG.useClaimMessages){
+                    sendClaimMessage();
+                }else{
+                    giveTrophies(null);
+                }
             }
     }
     public void addTrophy(Advancement advancement){
@@ -73,21 +77,22 @@ public class PlayerTrophyManager{
 
         }
         Utils.writeToJson(playerEntity,obj);
+        if(source!=null) {
+            int size = toGiveTrophies.size();
+            Text text = getClaimText();
+            Text text2 = new TranslatableText("achievement_plates.chat.claim_message", toGiveTrophies.size(), text).styled(style -> style.withColor(Formatting.YELLOW));
+            MutableText textF = new TranslatableText("achievement_plates.chat.claim_message_not_enough_space", text2).styled(style -> style.withColor(Formatting.YELLOW));
 
-        int size = toGiveTrophies.size();
-        Text text = getClaimText();
-        Text text2 = new TranslatableText("achievement_plates.chat.claim_message",toGiveTrophies.size(), text).styled(style -> style.withColor(Formatting.YELLOW));
-        MutableText textF = new TranslatableText("achievement_plates.chat.claim_message_not_enough_space", text2).styled(style -> style.withColor(Formatting.YELLOW));
-
-        if(size==n &&size!=0){
-            source.sendFeedback(textF,false);
-        }else if(size!=0){
-            source.sendFeedback(new TranslatableText("achievement_plates.chat.claim_message_given",n-size).styled(style -> style.withColor(Formatting.GREEN)),false);
-            source.sendFeedback(textF,false);
-        }else if(n==0){
-            source.sendFeedback(new TranslatableText("achievement_plates.chat.claim_message_no_trophy").styled(style -> style.withColor(Formatting.RED)),false);
-        }else{
-            source.sendFeedback(new TranslatableText("achievement_plates.chat.claim_message_given",n-size).styled(style -> style.withColor(Formatting.GREEN)),false);
+            if (size == n && size != 0) {
+                source.sendFeedback(textF, false);
+            } else if (size != 0) {
+                source.sendFeedback(new TranslatableText("achievement_plates.chat.claim_message_given", n - size).styled(style -> style.withColor(Formatting.GREEN)), false);
+                source.sendFeedback(textF, false);
+            } else if (n == 0) {
+                source.sendFeedback(new TranslatableText("achievement_plates.chat.claim_message_no_trophy").styled(style -> style.withColor(Formatting.RED)), false);
+            } else {
+                source.sendFeedback(new TranslatableText("achievement_plates.chat.claim_message_given", n - size).styled(style -> style.withColor(Formatting.GREEN)), false);
+            }
         }
     }
 

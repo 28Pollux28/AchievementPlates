@@ -70,14 +70,13 @@ public class PlateBlockEntity extends BlockEntity implements Nameable {
     }
 
     @Override
-    public NbtCompound writeNbt(NbtCompound nbt) {
+    public void writeNbt(NbtCompound nbt) {
         super.writeNbt(nbt);
         writeDisplayToNbt(nbt);
         nbt.putString("player_name", playerName);
         if (this.customName != null) {
             nbt.putString("CustomName", Text.Serializer.toJson(this.customName));
         }
-        return nbt;
     }
 
     private void writeDisplayToNbt(NbtCompound nbt){
@@ -110,12 +109,13 @@ public class PlateBlockEntity extends BlockEntity implements Nameable {
     @Nullable
     @Override
     public BlockEntityUpdateS2CPacket toUpdatePacket() {
-        return new BlockEntityUpdateS2CPacket(this.pos, PLATE_BLOCK_ENTITY_ID, this.toInitialChunkDataNbt());
+        return BlockEntityUpdateS2CPacket.create(this);
     }
 
     public NbtCompound toInitialChunkDataNbt() {
-        return this.writeNbt(new NbtCompound());
+        return this.createNbt();
     }
+
 
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         Text text = getCustomName();
