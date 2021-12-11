@@ -23,7 +23,7 @@ import java.util.HashMap;
 
 public class AchievementPlates implements ModInitializer {
 
-    public static String VERSION = "1.5";
+    public static String VERSION = "1.6";
     public static final String MODID = "achievement_plates";
     public static final Logger logger = LogManager.getLogger();
     public static MainConfigData CONFIG;
