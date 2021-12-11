@@ -3,7 +3,6 @@ package eu.pollux28.achievementplates.predicate;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonSyntaxException;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import eu.pollux28.achievementplates.AchievementPlates;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtElement;
 import net.minecraft.nbt.NbtHelper;
@@ -25,11 +24,7 @@ public class CustomNBTPredicate extends NbtPredicate{
     @Override
     public boolean test(@Nullable NbtElement element) {
         if(this.nbt !=null && this.nbt.getSize()==0){
-            if(element == null){
-                return true;
-            }else{
-                return false;
-            }
+            return element == null;
         }
         if (element == null) {
             return this == ANY;
