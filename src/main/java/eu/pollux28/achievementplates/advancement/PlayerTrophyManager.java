@@ -56,7 +56,7 @@ public class PlayerTrophyManager{
 
     private void sendClaimMessage(){
         Text text =getClaimText();
-        playerEntity.sendMessage(new TranslatableText("achievement_plates.chat.claim_message",toGiveTrophies.size(), text).styled(style -> style.withColor(Formatting.YELLOW)), false);
+        playerEntity.sendMessage(Text.translatable("achievement_plates.chat.claim_message",toGiveTrophies.size(), text).styled(style -> style.withColor(Formatting.YELLOW)), false);
         playerEntity.playSound(SoundEvents.ENTITY_EXPERIENCE_ORB_PICKUP, SoundCategory.RECORDS,1.0f,1.0f);
     }
 
@@ -80,27 +80,27 @@ public class PlayerTrophyManager{
         if(source!=null) {
             int size = toGiveTrophies.size();
             Text text = getClaimText();
-            Text text2 = new TranslatableText("achievement_plates.chat.claim_message", toGiveTrophies.size(), text).styled(style -> style.withColor(Formatting.YELLOW));
-            MutableText textF = new TranslatableText("achievement_plates.chat.claim_message_not_enough_space", text2).styled(style -> style.withColor(Formatting.YELLOW));
+            Text text2 = Text.translatable("achievement_plates.chat.claim_message", toGiveTrophies.size(), text).styled(style -> style.withColor(Formatting.YELLOW));
+            MutableText textF = Text.translatable("achievement_plates.chat.claim_message_not_enough_space", text2).styled(style -> style.withColor(Formatting.YELLOW));
 
             if (size == n && size != 0) {
                 source.sendFeedback(textF, false);
             } else if (size != 0) {
-                source.sendFeedback(new TranslatableText("achievement_plates.chat.claim_message_given", n - size).styled(style -> style.withColor(Formatting.GREEN)), false);
+                source.sendFeedback(Text.translatable("achievement_plates.chat.claim_message_given", n - size).styled(style -> style.withColor(Formatting.GREEN)), false);
                 source.sendFeedback(textF, false);
             } else if (n == 0) {
-                source.sendFeedback(new TranslatableText("achievement_plates.chat.claim_message_no_trophy").styled(style -> style.withColor(Formatting.RED)), false);
+                source.sendFeedback(Text.translatable("achievement_plates.chat.claim_message_no_trophy").styled(style -> style.withColor(Formatting.RED)), false);
             } else {
-                source.sendFeedback(new TranslatableText("achievement_plates.chat.claim_message_given", n - size).styled(style -> style.withColor(Formatting.GREEN)), false);
+                source.sendFeedback(Text.translatable("achievement_plates.chat.claim_message_given", n - size).styled(style -> style.withColor(Formatting.GREEN)), false);
             }
         }
     }
 
     private Text getClaimText() {
-        return Texts.bracketed(new TranslatableText("achievement_plates.chat.claim_message_action")).styled((style) -> {
+        return Texts.bracketed(Text.translatable("achievement_plates.chat.claim_message_action")).styled((style) -> {
             Style var10000 = style.withColor(Formatting.GREEN);
             ClickEvent.Action var10003 = ClickEvent.Action.RUN_COMMAND;
-            return var10000.withClickEvent(new ClickEvent(var10003, "/achievement_plates claim")).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new TranslatableText("achievement_plates.chat.claim_message_tooltip")));
+            return var10000.withClickEvent(new ClickEvent(var10003, "/achievement_plates claim")).withHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, Text.translatable("achievement_plates.chat.claim_message_tooltip")));
         });
     }
 }

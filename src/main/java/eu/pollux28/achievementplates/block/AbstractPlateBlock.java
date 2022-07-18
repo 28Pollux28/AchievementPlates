@@ -15,8 +15,8 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.state.property.Properties;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Style;
+import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Hand;
@@ -69,7 +69,7 @@ public abstract class AbstractPlateBlock extends HorizontalFacingBlock implement
                     plateBlockEntity.readNbt(nbtCompound2);
                     AdvancementDisplay display = plateBlockEntity.getDisplay();
                     if(!plateBlockEntity.getPlayerName().equalsIgnoreCase("")){
-                        plateBlockEntity.setCustomName(new LiteralText(plateBlockEntity.getPlayerName()).shallowCopy().setStyle(Style.EMPTY.withColor(Formatting.AQUA)).append(new LiteralText("'s ").setStyle(Style.EMPTY.withColor(Formatting.GRAY))).append(display.getTitle().shallowCopy().setStyle(Style.EMPTY.withColor(display.getFrame().getTitleFormat()))).append(new LiteralText(" trophy plate").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+                        plateBlockEntity.setCustomName(Text.literal(plateBlockEntity.getPlayerName()).copy().setStyle(Style.EMPTY.withColor(Formatting.AQUA)).append(Text.literal("'s ").setStyle(Style.EMPTY.withColor(Formatting.GRAY))).append(display.getTitle().copy().setStyle(Style.EMPTY.withColor(display.getFrame().getTitleFormat()))).append(Text.literal(" trophy plate").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
                     }
                 }
             }

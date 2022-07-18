@@ -16,10 +16,9 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
-import net.minecraft.text.LiteralText;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
-import net.minecraft.text.TranslatableText;
+import net.minecraft.text.TranslatableTextContent;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.WorldSavePath;
@@ -40,25 +39,26 @@ public class Utils {
         NbtCompound nbt1 = new NbtCompound();
         NbtCompound nbt2 = new NbtCompound();
         writeDisplayToNbt(nbt2, display);
-        nbt2.putString("player_name", playerName.asString());
+        nbt2.putString("player_name", playerName.getContent().toString());
         nbt1.put("BlockEntityTag", nbt2);
         ItemStack itemStack = ModBlocks.PLATE_ITEM.getDefaultStack();
         itemStack.setNbt(nbt1);
-        itemStack.setCustomName(playerName.shallowCopy().setStyle(Style.EMPTY.withColor(Formatting.AQUA)).append(new LiteralText("'s ").setStyle(Style.EMPTY.withColor(Formatting.GRAY))).append(display.getTitle().shallowCopy().setStyle(Style.EMPTY.withColor(display.getFrame().getTitleFormat()))).append(new LiteralText(" trophy plate").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+        itemStack.setCustomName(playerName.copy().setStyle(Style.EMPTY.withColor(Formatting.AQUA)).append(Text.literal("'s ").setStyle(Style.EMPTY.withColor(Formatting.GRAY))).append(display.getTitle().copy().setStyle(Style.EMPTY.withColor(display.getFrame().getTitleFormat()))).append(Text.literal(" trophy plate").setStyle(Style.EMPTY.withColor(Formatting.GRAY))));
+
         return itemStack;
     }
 
     public static void writeDisplayToNbt(NbtCompound nbt, AdvancementDisplay display) {
         NbtCompound nbtCompound = new NbtCompound();
-        if (display.getTitle() instanceof TranslatableText title) {
+        if (display.getTitle() instanceof TranslatableTextContent title) {
             nbtCompound.putString("display_title", title.getKey());
         } else {
-            nbtCompound.putString("display_title", display.getTitle().asString());
+            nbtCompound.putString("display_title", display.getTitle().getContent().toString());
         }
-        if (display.getDescription() instanceof TranslatableText desc) {
+        if (display.getDescription() instanceof TranslatableTextContent desc) {
             nbtCompound.putString("display_desc", desc.getKey());
         } else {
-            nbtCompound.putString("display_desc", display.getDescription().asString());
+            nbtCompound.putString("display_desc", display.getDescription().getContent().toString());
         }
 
         if (display.getBackground() != null) {

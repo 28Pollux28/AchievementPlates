@@ -9,7 +9,7 @@ import eu.pollux28.achievementplates.config.MainConfigData;
 import eu.pollux28.achievementplates.init.ModBlocks;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.client.rendereregistry.v1.BlockEntityRendererRegistry;
+import net.fabricmc.fabric.api.client.rendering.v1.BlockEntityRendererRegistry;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerWorldEvents;
 import net.fabricmc.loader.api.FabricLoader;
@@ -33,7 +33,7 @@ public class AchievementPlates implements ModInitializer {
         ModBlocks.registerBlocks();
         Commands.init();
         if(FabricLoader.getInstance().getEnvironmentType()== EnvType.CLIENT){
-            BlockEntityRendererRegistry.INSTANCE.register(ModBlocks.PLATE_BLOCK_ENTITY, PlateBlockEntityRenderer::new);
+            BlockEntityRendererRegistry.register(ModBlocks.PLATE_BLOCK_ENTITY, PlateBlockEntityRenderer::new);
         }
         ServerTickEvents.END_SERVER_TICK.register(server -> {
             if(!AchievementPlates.CONFIG.useClaimMessages || server.getTicks()%AchievementPlates.CONFIG.tickDelayBetweenClaimMessages ==0) {

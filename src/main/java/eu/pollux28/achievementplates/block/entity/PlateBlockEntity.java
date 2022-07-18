@@ -24,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class PlateBlockEntity extends BlockEntity implements Nameable {
     public static int PLATE_BLOCK_ENTITY_ID = 14587;
-    private AdvancementDisplay display= new AdvancementDisplay(new ItemStack((Items.BARRIER.asItem())), new TranslatableText("advancement_plates.notitle"), new TranslatableText("advancement_plates.nodesc"), (Identifier)null, AdvancementFrame.TASK   , true, true, false);
+    private AdvancementDisplay display= new AdvancementDisplay(new ItemStack((Items.BARRIER.asItem())), Text.translatable("advancement_plates.notitle"), Text.translatable("advancement_plates.nodesc"), (Identifier)null, AdvancementFrame.TASK   , true, true, false);
     private String playerName = "";
     private Text customName;
 
@@ -81,8 +81,8 @@ public class PlateBlockEntity extends BlockEntity implements Nameable {
 
     private void writeDisplayToNbt(NbtCompound nbt){
         NbtCompound nbtCompound = new NbtCompound();
-        nbtCompound.putString("display_title",((TranslatableText)display.getTitle()).getKey());
-        nbtCompound.putString("display_desc",((TranslatableText)display.getDescription()).getKey());
+        nbtCompound.putString("display_title",((TranslatableTextContent)display.getTitle().getContent()).getKey());
+        nbtCompound.putString("display_desc",((TranslatableTextContent)display.getDescription().getContent()).getKey());
         if(display.getBackground()!=null){
             nbtCompound.putString("display_background",display.getBackground().toString());
         }
@@ -95,8 +95,8 @@ public class PlateBlockEntity extends BlockEntity implements Nameable {
     }
 
     private AdvancementDisplay readDisplayFromNBT(NbtCompound nbt){
-        TranslatableText title = new TranslatableText(nbt.getString("display_title"));
-        TranslatableText desc = new TranslatableText(nbt.getString("display_desc"));
+        Text title = Text.translatable(nbt.getString("display_title"));
+        Text desc = Text.translatable(nbt.getString("display_desc"));
         Identifier background = nbt.contains("display_background") ? new Identifier(nbt.getString("display_background")) : null;
         ItemStack icon = ItemStack.fromNbt(nbt.getCompound("display_icon"));
         AdvancementFrame frame = AdvancementFrame.forName(nbt.getString("display_frame_id"));
@@ -120,16 +120,16 @@ public class PlateBlockEntity extends BlockEntity implements Nameable {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         Text text = getCustomName();
         if(text!=null){
-            player.sendMessage(new LiteralText("Advancement ").setStyle(Style.EMPTY.withColor(Formatting.GRAY)).append(Texts.setStyleIfAbsent((MutableText) display.getTitle(), Style.EMPTY.withColor(display.getFrame().getTitleFormat()))).append(new LiteralText(" was obtained by ")).append(new LiteralText(playerName).setStyle(Style.EMPTY.withColor(Formatting.AQUA))),true);
-            player.sendMessage(new TranslatableText("chat.type.advancement." + this.display.getFrame().getId(), new LiteralText(this.playerName).setStyle(Style.EMPTY.withColor(Formatting.AQUA)),display.getTitle()),true);
+            player.sendMessage(Text.literal("Advancement ").setStyle(Style.EMPTY.withColor(Formatting.GRAY)).append(Texts.setStyleIfAbsent((MutableText) display.getTitle(), Style.EMPTY.withColor(display.getFrame().getTitleFormat()))).append(Text.literal(" was obtained by ")).append(Text.literal(playerName).setStyle(Style.EMPTY.withColor(Formatting.AQUA))),true);
+            player.sendMessage(Text.translatable("chat.type.advancement." + this.display.getFrame().getId(), Text.literal(this.playerName).setStyle(Style.EMPTY.withColor(Formatting.AQUA)),display.getTitle()),true);
         }else{
-            player.sendMessage(new LiteralText("This trophy was not obtained !").setStyle(Style.EMPTY.withColor(Formatting.RED)),false);
+            player.sendMessage(Text.literal("This trophy was not obtained !").setStyle(Style.EMPTY.withColor(Formatting.RED)),false);
         }
         return ActionResult.CONSUME;
     }
 
     public ItemStack getPickStack() {
-        return Utils.getPlateItemStack(new LiteralText(playerName), this.display);
+        return Utils.getPlateItemStack(Text.literal(playerName), this.display);
     }
 
     public void setCustomName(Text customName) {
@@ -137,7 +137,7 @@ public class PlateBlockEntity extends BlockEntity implements Nameable {
     }
 
     public Text getName() {
-        return this.customName != null ? this.customName : new TranslatableText("blocks."+ BlockEntityType.getId(this.getType()));
+        return this.customName != null ? this.customName : Text.translatable("blocks."+ BlockEntityType.getId(this.getType()));
     }
 
     public Text getDisplayName() {
